@@ -1,5 +1,12 @@
 package beginner;
 
+//È¦¼ö¿Í Â¦¼ö
 public class OddEven {
-
+	public String solution(int num) {
+        if(num % 2 == 0) {
+            return "Even";
+        } else {
+            return "Odd";
+        } 
+    }
 }

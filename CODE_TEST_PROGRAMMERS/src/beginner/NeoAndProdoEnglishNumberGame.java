@@ -6,35 +6,38 @@ import java.util.HashMap;
 class NeoAndProdoEnglishNumberGame {
   public int solution(String s) {  	
   	final HashMap<String, Integer> numberEnglishMap = new HashMap<>();
-  	numberEnglishMap.put("zero", 1);
-  	numberEnglishMap.put("one", 2);
-  	numberEnglishMap.put("two", 3);
-  	numberEnglishMap.put("three", 4);
-  	numberEnglishMap.put("four", 5);
-  	numberEnglishMap.put("five", 6);
-  	numberEnglishMap.put("six", 7);
-  	numberEnglishMap.put("seven", 8);
-  	numberEnglishMap.put("eight", 9);
-  	numberEnglishMap.put("nine", 10);
+  	numberEnglishMap.put("zero", 0);
+  	numberEnglishMap.put("one", 1);
+  	numberEnglishMap.put("two", 2);
+  	numberEnglishMap.put("three", 3);
+  	numberEnglishMap.put("four", 4);
+  	numberEnglishMap.put("five", 5);
+  	numberEnglishMap.put("six", 6);
+  	numberEnglishMap.put("seven", 7);
+  	numberEnglishMap.put("eight", 8);
+  	numberEnglishMap.put("nine", 9);
 
-		StringBuilder sb = new StringBuilder();
+	StringBuilder sb = new StringBuilder();
 
+	String temps = "";
   	//string 배열에서 정수가 나올때까지 돌리면서 stringbuilder에 그동안의 값을 저장하고 치환
   	for(int i = 0; i < s.length(); i++) {
-  		
-  		if(Character.digit(s.charAt(i), i) > 0) {
-  			int changedNumber = numberEnglishMap.get(sb.toString());
-  			s = changedNumber + s.substring(i, s.length());
-  			sb.setLength(0);
+  		if(Character.isDigit(s.charAt(i))) {
+  			temps += s.charAt(i);
   		} else {
   			sb.append(s.charAt(i));
+  			if(sb.toString() != null && sb.toString() != "") {
+  				if(numberEnglishMap.containsKey(sb.toString())) {
+  	  				int changedNumber = numberEnglishMap.get(sb.toString());
+  	  	  			temps += changedNumber;
+  	  	  			sb.setLength(0);
+  				} 
+  			}
   		}
+  		
+  
   	}
   	
-  	if(sb.length() != 0) {
-			int changedNumber = numberEnglishMap.get(sb.toString());
-			s = changedNumber + s.substring(s.indexOf(sb.toString()), s.length());
-  	}
-      return Integer.parseInt(s);
+      return Integer.parseInt(temps);
   }
 }
